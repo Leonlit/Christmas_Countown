@@ -57,10 +57,6 @@ window.onload = function () {
       targetDate = new Date("Dec 25, 2019 15:37:25").getTime()
     }
   }, 1000)
-  snow()
-  drawdecor()
-  playsong()
-  merryChristmas()
 }
 
 //start snowing at the 7th day before christmas
