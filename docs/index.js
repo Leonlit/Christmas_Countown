@@ -22,9 +22,6 @@ function playsong () {
     playsong();
   }
 }
-
-//credit http://www.freexmasmp3.com/
-//
 //declaring canvas id and putting the width and height as the screens
 var canvas = document.getElementById("canvas");
 var ctx = canvas.getContext("2d");
