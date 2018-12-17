@@ -57,6 +57,10 @@ window.onload = function () {
       targetDate = new Date("Dec 25, 2019 15:37:25").getTime()
     }
   }, 1000)
+  snow()
+  drawdecor()
+  playsong()
+  merryChristmas()
 }
 
 //start snowing at the 7th day before christmas
@@ -159,18 +163,10 @@ function credit () {
   var fakebody = document.getElementById("fakeBody");
   var creditText = document.getElementById("creText");
   if (count==0 || creditText.style.visibility=="hidden") {
-    fakebody.style.visibility = "hidden";
     creditText.style.visibility = "visible";
-    house.style.visibility = "hidden"
-    snowFloor.style.visibility = "hidden"
-    tree.style.visibility = "hidden"
     count = 1
   }else if (count==1 || creditText.style.visibility=="visible"){
-    fakebody.style.visibility = "visible"
     creditText.style.visibility = "hidden";
-    house.style.visibility = "visible"
-    snowFloor.style.visibility = "visible"
-    tree.style.visibility = "visible"
     count = 0
   }
 }
