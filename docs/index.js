@@ -22,6 +22,9 @@ function playsong () {
     playsong();
   }
 }
+
+//credit http://www.freexmasmp3.com/
+//
 //declaring canvas id and putting the width and height as the screens
 var canvas = document.getElementById("canvas");
 var ctx = canvas.getContext("2d");
@@ -43,10 +46,9 @@ window.onload = function () {
         timer.style.visibility = "hidden"
     }
     else if (gaps<=6.048e+8) {
-      snow()
       drawdecor()
       playsong()
-
+      document.getElementById("canvas").style.visibility = "visible";
     }
     //after one week
     else if (gaps <=-6.048e+8) {
@@ -54,42 +56,45 @@ window.onload = function () {
       targetDate = new Date("Dec 25, 2019 15:37:25").getTime()
     }
   }, 1000)
-}
 
 //start snowing at the 7th day before christmas
-function snow(){
 
-  //snow canvas
+	//canvas init
 	var canvas = document.getElementById("canvas");
 	var ctx = canvas.getContext("2d");
-  //making the canvas same height and width as the device screen
+
+	//canvas dimensions
 	var width = window.innerWidth;
 	var height = window.innerHeight;
 	canvas.width = width;
-	canvas.height = height;
-  var density;
+	canvas.height = height
 
-  //too much snow will be abit messy and too compact
-  if (window.innerWidth>381) {
-	   density = 100;
-  }else {density = 20}
-
+	//snowflake particles
+  density=0
+  if (width>381 || height>500) {
+    density=50
+  }else {
+    density = 25;
+  }
 	var particles = [];
-	for(var i = 0; i < density; i++) {
+	for(var i = 0; i < density; i++)
+	{
 		particles.push({
-			x: Math.random()*width,
-			y: Math.random()*height,
-			r: Math.random()*4+1,
+			x: Math.random()*width, //x-coordinate
+			y: Math.random()*height, //y-coordinate
+			r: Math.random()*4+1, //radius
 			d: Math.random()*density
 		})
 	}
 
-	function draw() {
+	function drawSnow()
+	{
 		ctx.clearRect(0, 0, width, height);
 
 		ctx.fillStyle = "rgba(255, 255, 255, 0.8)";
 		ctx.beginPath();
-		for(var i = 0; i < density; i++) {
+		for(var i = 0; i < density; i++)
+		{
 			var p = particles[i];
 			ctx.moveTo(p.x, p.y);
 			ctx.arc(p.x, p.y, p.r, 0, Math.PI*2, true);
@@ -98,22 +103,33 @@ function snow(){
 		updatedraw();
 	}
 
-  // angle is used to make the snow move abit more natural adding radius is just to make p.y difer from the p.x so basically Im just messing around with number lol XD
-	function updatedraw() {
-
-		for(var i = 0; i < density; i++) {
+	var angle = 0;
+	function updatedraw()
+	{
+		angle += 0.001;
+		for(var i = 0; i < density; i++)	{
 			var p = particles[i];
-			p.y += Math.sin(0) + p.r/2+1;
-			p.x += Math.sin(0) * 2;
-
-			if(p.x > width+5 || p.x < -5 || p.y > height) {
+			p.y += Math.cos(angle+p.d) + 1 + p.r/2;
+			p.x += Math.sin(angle) * 2;
+			if(p.x > width+5 || p.x < -5 || p.y > height){
 				if(i%3 > 0) {
 					particles[i] = {x: Math.random()*width, y: -10, r: p.r, d: p.d};
+				}else {
+					//If the flake is exitting from the right
+					if(Math.sin(angle) > 0) {
+						//Enter from the left
+						particles[i] = {x: -5, y: Math.random()*height, r: p.r, d: p.d};
+					}else {
+						//Enter from the right
+						particles[i] = {x: width+5, y: Math.random()*height, r: p.r, d: p.d};
+					}
 				}
 			}
 		}
 	}
-	setInterval(draw, 40);
+
+	//animation loop
+	setInterval(drawSnow, 33);
 }
 
 //drawing house ,snow floor and tree
