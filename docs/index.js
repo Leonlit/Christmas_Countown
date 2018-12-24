@@ -28,8 +28,10 @@ function playsong () {
 //declaring canvas id and putting the width and height as the screens
 var canvas = document.getElementById("canvas");
 var ctx = canvas.getContext("2d");
+var arrow = document.getElementById("credit");
 
-window.onload = function () {
+document.body.onload = function () {
+  arrow.addEventListener("click", credit, false);
   var x = setInterval(function() {
     var currtime = new Date().getTime();
     var gaps = targetDate - currtime;
@@ -49,6 +51,9 @@ window.onload = function () {
       drawdecor()
       playsong()
       document.getElementById("canvas").style.visibility = "visible";
+      if (gaps<5 * 60 * 1000 && gaps>0) {
+        timer.style.animation = "peektime 1s infinite";
+      }
     }
     //after one week
     else if (gaps <=-6.048e+8) {
@@ -72,9 +77,9 @@ window.onload = function () {
 	//snowflake particles
   density=0
   if (width>381 || height>500) {
-    density=50
+    density=100
   }else {
-    density = 25;
+    density = 50;
   }
 	var particles = [];
 	for(var i = 0; i < density; i++)
@@ -107,22 +112,13 @@ window.onload = function () {
 	function updatedraw()
 	{
 		angle += 0.001;
+    //redraw the snow to the top of the
 		for(var i = 0; i < density; i++)	{
 			var p = particles[i];
 			p.y += Math.cos(angle+p.d) + 1 + p.r/2;
-			p.x += Math.sin(angle) * 2;
-			if(p.x > width+5 || p.x < -5 || p.y > height){
+			if(p.y > height){
 				if(i%3 > 0) {
 					particles[i] = {x: Math.random()*width, y: -10, r: p.r, d: p.d};
-				}else {
-					//If the flake is exitting from the right
-					if(Math.sin(angle) > 0) {
-						//Enter from the left
-						particles[i] = {x: -5, y: Math.random()*height, r: p.r, d: p.d};
-					}else {
-						//Enter from the right
-						particles[i] = {x: width+5, y: Math.random()*height, r: p.r, d: p.d};
-					}
 				}
 			}
 		}
@@ -166,16 +162,15 @@ function changeColor () {
   text.style.webkitTextStrokeColor = randColorRGB();
 }
 
-var count = 0
 //function to popup the credit section
+
 function credit () {
-  var fakebody = document.getElementById("fakeBody");
   var creditText = document.getElementById("creText");
-  if (count==0 || creditText.style.visibility=="hidden") {
-    creditText.style.visibility = "visible";
-    count = 1
-  }else if (count==1 || creditText.style.visibility=="visible"){
-    creditText.style.visibility = "hidden";
-    count = 0
+  if (creditText.style.opacity==0) {
+    //creditText.style.display="block"
+    creditText.style.opacity=1
+  }else {
+    //creditText.style.display = "none";
+    creditText.style.opacity=0
   }
 }

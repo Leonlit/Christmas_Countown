@@ -2,6 +2,42 @@ body {
   background-color:black ;
   margin:0;
   padding:0;
+  -webkit-touch-callout: none;
+    -webkit-user-select: none;
+     -khtml-user-select: none;
+       -moz-user-select: none;
+        -ms-user-select: none;
+            user-select: none;
+
+}
+
+#timer {
+  z-index:12;
+  font-size:36px;
+}
+
+i {
+  position: absolute;
+  border: solid white;
+  border-width: 0 3px 3px 0;
+  display: inline-block;
+  padding: 10px;
+  top:50%;
+  right:10px;
+  opacity: 0.6;
+}
+
+i:hover {
+  border: solid white;
+  border-width: 0 3px 3px 0;
+  display: inline-block;
+  padding: 15px;
+  transition-duration: 0.3s;
+}
+
+.left {
+  transform: rotate(135deg);
+  -webkit-transform: rotate(135deg);
 }
 
 canvas {
@@ -17,46 +53,31 @@ canvas {
 
 #text {
   transition-duration: 1s;
-  visibility:hidden;
+  display:none;
 }
 
 #credit {
-  position: absolute;
-  right:10px;
-  top:5px;
-  width:50px;
-  height:50px;
   cursor: pointer;
   z-index: 11;
-}
-
-#creText {
-  top:10%;
-  color:white;
-  width:50%;
-  max-height:250px;
-  word-wrap: break-word;
-  padding:10%;
-  margin-left:15%;
-  z-index: 100;
-  position: absolute;
-  visibility:hidden;
-  background-color: black;
-  border-radius: 20px;
-  border:2px solid grey;
 }
 
 #creText a{
   color:lightblue;
   text-decoration: none;
   cursor: pointer;
+  background-color: black;
   font-family:monospace ;
+  text-shadow: 3px 2px 3px lightblue;
 }
 
-@media only screen and (min-width:382px) {
+#creText {
+    transition-duration: 3s;
+}
+
+@media only screen and (min-width: 1000px) {
   #timer {
     text-align: center;
-    font-size: 2em;
+    font-size: 36px;
     font-family:Harrington;
     font-weight:900;
     font-style:italic;
@@ -65,12 +86,37 @@ canvas {
     color:white;
   }
 
+  @keyframes peektime {
+    0% {font-size: 36px;color:white;}
+    50% {font-size: 45px;color:red;text-shadow:2px 4px 5px red ;}
+    100% {font-size: 36px;color:white;}
+  }
+
+
   #text {
     -webkit-text-stroke-width:2px;
     -webkit-text-stroke-color:white;
     color:black;
     font-size: 300%;
     text-align: center;
+  }
+
+  #creText {
+    top:10%;
+    right:5%;
+    color:white;
+    width:50%;
+    min-height:150px;
+    max-height: 250px;
+    word-wrap: break-word;
+    padding:5%;
+    position: absolute;
+    opacity: 0;
+    background-color: black;
+    overflow: auto;
+    text-shadow: 3px 2px 3px white;
+    font-family: Harrington;
+    font-size:28px;
   }
 
   #house {
@@ -106,29 +152,118 @@ canvas {
   }
 }
 
-@media only screen and (max-width: 381px) {
-  #credit {
-    width:30px;
-    height:30px;
-    top:10px;
+@media only screen and (max-width: 999px) and (min-width: 401px){
+  #timer {
+    text-align: center;
+    font-size: 26px;
+    font-family:Harrington;
+    font-weight:900;
+    font-style:italic;
+    letter-spacing:5px;
+    margin-top: 10px;
+    color:white;
+  }
+
+  @keyframes peektime {
+    0% {font-size: 24px;color:white;}
+    50% {font-size: 32px;color:red;text-shadow:2px 4px 5px red ;}
+    100% {font-size: 32px;color:white;}
+  }
+
+
+  #text {
+    -webkit-text-stroke-width:2px;
+    -webkit-text-stroke-color:white;
+    color:black;
+    font-size: 300%;
+    text-align: center;
   }
 
   #creText {
+    top:10%;
+    color:white;
+    width:70%;
+    min-height:150px;
+    max-height: 250px;
+    word-wrap: break-word;
+    padding:5%;
+    margin-left:10%;
+    opacity: 0;
+    z-index: 4;
+    border-radius: 18px;
+    overflow: auto;
+    font-size: 20px;
+    font-family: Harrington,san-serif,Georgia;
+    text-shadow: 2px 1px 2px white;
+  }
+
+  #house {
+    max-width: 400px;
     position: absolute;
-    margin-left:0;
+    width: 90%;
+    height:50%;
+    bottom: 3%;
     left:5%;
+    z-index:1;
+    visibility: hidden;
+  }
+
+  #snowFloor {
+    position: absolute;
+    bottom:0px;
+    width:100%;
+    height:30px;
+    padding:0;
+    z-index:2;
+    visibility: hidden;
+  }
+
+  #tree {
+    position: absolute;
+    width:100px;
+    max-width:120px;
+    height:50%;
+    max-height:250px;
+    bottom:0px;
+    z-index:0;
+    visibility: hidden;
+  }
+}
+
+@media only screen and (max-width: 400px){
+
+  #creText {
+    width:80%;
+    padding: 5%;
+    min-height:60px;
+    max-height: 150px;
+    color:white;
+    margin-left: 5%;
+    z-index:7;
+    border-radius:10px;
+    opacity: 0;
+    font-family:cursive,Georgia,san-serif;
+    font-size:12px;
+    text-shadow: 2px 1px 2px white;
   }
 
   #timer {
     text-align: center;
-    font-size: 24px;
-    font-family:Harrington;
+    font-size: 18px;
+    font-family:"Comic Sans MS", cursive, sans-serif;
     font-weight:900;
     font-style:italic;
     letter-spacing:5px;
     margin-top: 5%;
     color:white;
   }
+
+  @keyframes peektime {
+    0% {font-size: 18px;color:white;}
+    50% {font-size: 24px;color:steelblue;text-shadow:2px 4px 5px lightblue ;}
+    100% {font-size: 18px;color:white;}
+  }
+
 
 #text {
   -webkit-text-stroke-width:3px;
@@ -143,7 +278,9 @@ canvas {
   position: absolute;
   width: 90%;
   height:50%;
-  bottom: 3%;
+  max-height: 300px;
+  min-height: 100px;
+  bottom: 20px;
   left:5%;
   z-index:2;
   visibility: hidden;
