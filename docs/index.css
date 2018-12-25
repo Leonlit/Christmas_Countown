@@ -53,7 +53,7 @@ canvas {
 
 #text {
   transition-duration: 1s;
-  display:none;
+  visibility: hidden;
 }
 
 #credit {

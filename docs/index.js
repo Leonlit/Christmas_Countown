@@ -45,12 +45,15 @@ document.body.onload = function () {
     timer.innerHTML = days + "d " + hours + "h " + minutes + "m " + seconds + "s ";
     if (gaps<= 0) {
         merryChristmas()
+        drawdecor()
+        playsong()
         timer.style.visibility = "hidden"
+        canvas.style.visibility = "visible";
     }
     else if (gaps<=6.048e+8) {
       drawdecor()
       playsong()
-      document.getElementById("canvas").style.visibility = "visible";
+      canvas.style.visibility = "visible";
       if (gaps<5 * 60 * 1000 && gaps>0) {
         timer.style.animation = "peektime 1s infinite";
       }
