@@ -1,4 +1,6 @@
-var targetDate = new Date("Dec 25, 2018 15:37:25").getTime()
+var current_year = (new Date().getFullYear()).toString();
+var targetDate = new Date("Dec 25, " + current_year + " 15:37:25").getTime();
+console.log(targetDate +1)
 var house = document.getElementById("house")
 var christmasSong = ["JingleBellPiano.mp3","OChristmasTree.mp3", "WeWishYouAMerryChristmas.mp3","dingDongMerrily.mp3","herald.mp3"]
 var currSong = 0
@@ -23,15 +25,13 @@ function playsong () {
   }
 }
 
-//credit http://www.freexmasmp3.com/
-//
 //declaring canvas id and putting the width and height as the screens
 var canvas = document.getElementById("canvas");
 var ctx = canvas.getContext("2d");
-var arrow = document.getElementById("credit");
+var arrow = document.getElementById("creditSlide");
 
 document.body.onload = function () {
-  arrow.addEventListener("click", credit, false);
+  arrow.addEventListener("click", creditsliding, false);
   var x = setInterval(function() {
     var currtime = new Date().getTime();
     var gaps = targetDate - currtime;
@@ -43,7 +43,7 @@ document.body.onload = function () {
 
     var timer = document.getElementById("timer")
     timer.innerHTML = days + "d " + hours + "h " + minutes + "m " + seconds + "s ";
-    if (gaps<= 0) {
+    if (gaps<= 0 && gaps>=-518400000) {
         merryChristmas()
         drawdecor()
         playsong()
@@ -58,10 +58,10 @@ document.body.onload = function () {
         timer.style.animation = "peektime 1s infinite";
       }
     }
-    //after one week
-    else if (gaps <=-6.048e+8) {
+    //after christmas
+    else if (gaps <=-518400000) {
       timer.style.visibility = "visible"
-      targetDate = new Date("Dec 25, 2019 15:37:25").getTime()
+      targetDate = new Date("Dec 25, " + (current_year+1) + " 15:37:25").getTime();
     }
   }, 1000)
 
@@ -167,8 +167,8 @@ function changeColor () {
 
 //function to popup the credit section
 
-function credit () {
-  var creditText = document.getElementById("creText");
+function creditsliding () {
+  var creditText = document.getElementById("creditText");
   if (creditText.style.opacity==0) {
     //creditText.style.display="block"
     creditText.style.opacity=1
