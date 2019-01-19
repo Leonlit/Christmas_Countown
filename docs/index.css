@@ -51,17 +51,17 @@ canvas {
   visibility: hidden;
 }
 
-#text {
+#header {
   transition-duration: 1s;
   visibility: hidden;
 }
 
-#credit {
+#creditSlide {
   cursor: pointer;
   z-index: 11;
 }
 
-#creText a{
+#creditText a{
   color:lightblue;
   text-decoration: none;
   cursor: pointer;
@@ -70,7 +70,7 @@ canvas {
   text-shadow: 3px 2px 3px lightblue;
 }
 
-#creText {
+#creditText {
     transition-duration: 3s;
 }
 
@@ -93,7 +93,7 @@ canvas {
   }
 
 
-  #text {
+  #header {
     -webkit-text-stroke-width:2px;
     -webkit-text-stroke-color:white;
     color:black;
@@ -101,7 +101,7 @@ canvas {
     text-align: center;
   }
 
-  #creText {
+  #creditText {
     top:10%;
     right:5%;
     color:white;
@@ -171,7 +171,7 @@ canvas {
   }
 
 
-  #text {
+  #header {
     -webkit-text-stroke-width:2px;
     -webkit-text-stroke-color:white;
     color:black;
@@ -179,7 +179,7 @@ canvas {
     text-align: center;
   }
 
-  #creText {
+  #creditText {
     top:10%;
     color:white;
     width:70%;
@@ -232,7 +232,7 @@ canvas {
 
 @media only screen and (max-width: 400px){
 
-  #creText {
+  #creditText {
     width:80%;
     padding: 5%;
     min-height:60px;
@@ -265,7 +265,7 @@ canvas {
   }
 
 
-#text {
+#header {
   -webkit-text-stroke-width:3px;
   position: relative;
   -webkit-text-stroke-color:white;
